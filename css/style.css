@@ -1,0 +1,122 @@
+.header {
+    height: auto;
+    width: 100%;
+    display: inline-block;
+    background: #5585b9;
+    color: #FFFFFF;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+#serial {
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* Start of Jsontableify styles */
+
+table {
+    font-family: 'Source Sans Pro', sans-serif;
+    border: 1px solid thin #c1c1c1;
+    background-color: #EEEEEE;
+    width: 100%;
+    text-align: left;
+    table-layout:fixed;
+    border-collapse: collapse;
+}
+
+td,
+th {
+    text-transform: capitalize;
+    text-align: left;
+    vertical-align: center;
+    text-overflow: ellipsis;
+    border: 2px solid thin #c1c1c1;
+    word-wrap: break-word;
+    padding: 3px 3px;
+    font-size: 13px;
+}
+
+table tr:nth-child(even) {
+    background: #e5e5e5;
+}
+
+.thead {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    border-left: 1px solid thin #a3a3a3;
+    background: #5585b9;
+}
+
+hr {
+    border-top: 1px dotted black;
+}
+
+.no-break {
+    page-break-inside: avoid !important;
+} 
+
+table,tr,td,div {
+    page-break-inside: auto !important;
+}
+
+th {
+    width: 30%;
+    border-right: 1px solid #c1c1c1 !important;
+}
+
+/* End of Jsontableify styles */
+
+/* Start of snackbar styles */
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #333; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+/* End of snackbar styles */
