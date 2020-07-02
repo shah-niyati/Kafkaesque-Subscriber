@@ -10,18 +10,18 @@ function fetchAnalyticsData() {
         var message = JSON.parse(response.data);
 
         let data = atob(message['payload']);
-        console.log('Received data is = ' + data);
+        // console.log('Received data is = ' + data);
 
         ws.send(JSON.stringify({'messageId' : message['messageId']}));
         
         var x =  new Jsontableify({
-            headerList: ['systemUsageInfo', 'deviceStatusInfo', 'storageInfo'],
+            headerList: ['systemUsageInfo', 'deviceStatusInfo', 'storageInfo', 'inputSourceInfo', 'deviceUsageInfo', 'firmwareUpgradeInfo'],
             dateFormat: 'DD-MM-YYYY',
             replaceTextMap: { YearsOfExperience: 'Years Of Experience' },
-            excludeKeys: ['Current CTC'],
-          }).toHtml(JSON.parse(data));
+            excludeKeys: ['playerId'],
+          }).toHtml(JSON.parse(data).data);
 
-        player.innerHTML = 'Player Serial Number: ' + message['properties']['playerId'];
+        player.innerHTML = 'Player Serial Number: ' + JSON.parse(data).playerId;
         table.innerHTML += x.html;
 
         // Add snackbar notification
@@ -119,7 +119,7 @@ function isValidDate(date) {
                   var val = o[k];
                   if (k == 'timeStamp') val = this.toDate(val);
                   // Generate random number between 20 to 30
-                  if (k == 'temperature') val = Math.floor(Math.random() * 6 + 20);
+                  // if (k == 'temperature') val = Math.floor(Math.random() * 6 + 20);
   
                 //   if (val) {
                     isNodeEmpty = false;
