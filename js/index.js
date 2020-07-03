@@ -2,8 +2,15 @@ var table = document.getElementById("data");
 var player = document.getElementById("serial");
 
 function fetchAnalyticsData() {
-    const token = 'eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJuaXlhdGktc2hhaC1jbGllbnQtNWVjNTE1Y2FlNTFkOCJ9.G6OZ3QpgL4Y4TtUSzvYHGXemwAcZ6swQ4o-_rzyezIWZUwoj7xHucJnUOuCuXPxIF_aWszd4opr9uzTlEOkW_rhErlMx24o7VOnROz1-0vnmw1Nw0xcPDuYMUZzOycUfssbfgytrhF9FpymdEogSP6f5ufGYe7jAP0tXzVVwOW9Sw90FCm9YUoTOlX5LFOZ1gMe6SQcx-H4_CqHnkFyfDpDRiXjwMfjY4hMYv0adgSomncxWp_QfVw1M5QN6UkrwzbpUM6xPwGchKsRsRdnrG5r2ksv2nW_eAabzimV4ajB6Cq1Bo91MYiGTWAkTY7n0URbIlPAInNgQtdlxSDjqIQ';
-    const topic = 'wss://uscentral1.azure.kafkaesque.io:8500/ws/v2/consumer/persistent/niyati-shah/local-uscentral1-azure/tc1-messages/sub-1?token=' + token;
+    // const token = 'eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJuaXlhdGktc2hhaC1jbGllbnQtNWVjNTE1Y2FlNTFkOCJ9.G6OZ3QpgL4Y4TtUSzvYHGXemwAcZ6swQ4o-_rzyezIWZUwoj7xHucJnUOuCuXPxIF_aWszd4opr9uzTlEOkW_rhErlMx24o7VOnROz1-0vnmw1Nw0xcPDuYMUZzOycUfssbfgytrhF9FpymdEogSP6f5ufGYe7jAP0tXzVVwOW9Sw90FCm9YUoTOlX5LFOZ1gMe6SQcx-H4_CqHnkFyfDpDRiXjwMfjY4hMYv0adgSomncxWp_QfVw1M5QN6UkrwzbpUM6xPwGchKsRsRdnrG5r2ksv2nW_eAabzimV4ajB6Cq1Bo91MYiGTWAkTY7n0URbIlPAInNgQtdlxSDjqIQ';
+    // const topic = 'wss://uscentral1.azure.kafkaesque.io:8500/ws/v2/consumer/persistent/niyati-shah/local-uscentral1-azure/tc1-messages/sub-1?token=' + token;
+
+    let url = document.getElementById("url").value;
+    let token = document.getElementById("token").value;
+
+    if (url && token) {
+      const topic = url + '?token=' + token; 
+
     let ws = new WebSocket(topic);
     
     ws.onmessage = function(response) {
@@ -23,6 +30,7 @@ function fetchAnalyticsData() {
 
         player.innerHTML = 'Player Serial Number: ' + JSON.parse(data).playerId;
         table.innerHTML += x.html;
+    }
 
         // Add snackbar notification
         var snackbar = document.getElementById("snackbar");
@@ -34,7 +42,6 @@ function fetchAnalyticsData() {
     table.innerHTML += '<br>';
 }
 
-fetchAnalyticsData();
 
 /* Start of Jsontableify code */
 

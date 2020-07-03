@@ -3,6 +3,19 @@
     <link href='./css/style.css' rel="stylesheet" type = "text/css">
     <body>
         <header class = "header">SOC Analytics Data</header>
+        <div>
+            <label>URL</label>
+            <input type="text" id = "url" style="width: 40%"/>
+        </div>
+        <br />
+        <div>
+            <label style="vertical-align: top;">Token</label>
+            <textarea rows=5 cols=40 id = "token" style="width: 20%"></textarea>
+        </div>
+        <br />
+        <div>
+            <button onclick="fetchAnalyticsData()">Fetch Data</button>
+        </div>
         <div id = "serial"></div>
         <div id = "data"></div>
         <div id = "snackbar">New data received</div>
