@@ -21,6 +21,7 @@ function fetchAnalyticsData() {
 
         ws.send(JSON.stringify({'messageId' : message['messageId']}));
         
+        table.innerHTML += '<div class="serial">Player Serial Number: ' + JSON.parse(data).playerId + '</div>';
         var x =  new Jsontableify({
             headerList: ['systemUsageInfo', 'deviceStatusInfo', 'storageInfo', 'inputSourceInfo', 'deviceUsageInfo', 'firmwareUpgradeInfo'],
             dateFormat: 'DD-MM-YYYY',
@@ -28,7 +29,7 @@ function fetchAnalyticsData() {
             excludeKeys: ['playerId'],
           }).toHtml(JSON.parse(data).data);
 
-        player.innerHTML = 'Player Serial Number: ' + JSON.parse(data).playerId;
+        // player.innerHTML = 'Player Serial Number: ' + JSON.parse(data).playerId;
         table.innerHTML += x.html;
     }
 

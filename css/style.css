@@ -11,7 +11,7 @@
     font-size: xx-large;
 }
 
-#serial {
+.serial {
     font-weight: bold;
     font-style: italic;
 }
