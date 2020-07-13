@@ -11,33 +11,38 @@ function fetchAnalyticsData() {
     if (url && token) {
       const topic = url + '?token=' + token; 
 
-    let ws = new WebSocket(topic);
-    
-    ws.onmessage = function(response) {
-        var message = JSON.parse(response.data);
+      let ws = new WebSocket(topic);
+      
+      ws.onmessage = function(response) {
+          var message = JSON.parse(response.data);
 
-        let data = atob(message['payload']);
-        // console.log('Received data is = ' + data);
+          let data = atob(message['payload']);
+          // console.log('Received data is = ' + data);
 
-        ws.send(JSON.stringify({'messageId' : message['messageId']}));
-        
-        table.innerHTML += '<div class="serial">Player Serial Number: ' + JSON.parse(data).playerId + '</div>';
-        var x =  new Jsontableify({
-            headerList: ['systemUsageInfo', 'deviceStatusInfo', 'storageInfo', 'inputSourceInfo', 'deviceUsageInfo', 'firmwareUpgradeInfo'],
-            dateFormat: 'DD-MM-YYYY',
-            replaceTextMap: { YearsOfExperience: 'Years Of Experience' },
-            excludeKeys: ['playerId'],
-          }).toHtml(JSON.parse(data).data);
+          ws.send(JSON.stringify({'messageId' : message['messageId']}));
+          
+          table.innerHTML += '<div class="serial">Player Serial Number: ' + JSON.parse(data).playerId + '</div>';
+          var x =  new Jsontableify({
+              headerList: ['systemUsageInfo', 'deviceStatusInfo', 'storageInfo', 'inputSourceInfo', 'deviceUsageInfo', 'firmwareUpgradeInfo'],
+              dateFormat: 'DD-MM-YYYY',
+              replaceTextMap: { YearsOfExperience: 'Years Of Experience' },
+              excludeKeys: ['playerId'],
+            }).toHtml(JSON.parse(data).data);
 
-        // player.innerHTML = 'Player Serial Number: ' + JSON.parse(data).playerId;
-        table.innerHTML += x.html;
-    }
+          // player.innerHTML = 'Player Serial Number: ' + JSON.parse(data).playerId;
+          table.innerHTML += x.html;
 
-        // Add snackbar notification
-        var snackbar = document.getElementById("snackbar");
-        snackbar.className = 'show';
-        // After 3 seconds, remove the notification
-        setTimeout( function() { snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+          // Add snackbar notification
+          var snackbar = document.getElementById("snackbar");
+          snackbar.className = 'show';
+          // After 3 seconds, remove the notification
+          setTimeout( function() { snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+      }
+
+      ws.onerror = function() {
+        console.log('Failed to fetch data from the server');
+      }
+
     }
 
     table.innerHTML += '<br>';
